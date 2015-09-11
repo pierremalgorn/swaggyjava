@@ -8,15 +8,27 @@
 	</div>
   </div>
 	<div class="row" id="actions">
-		<div class="col-md-10">
-		<form action="/ComputerServlet" method="GET" class="form-inline" role="form">
+		<div class="col-md-6">
+		<form action="/swaggyjava/ComputerServlet" method="GET" class="form-inline" role="form">
 			<input type="search" id="searchbox" name="search" class="form-control"
 				value="" placeholder="Search name">
 			<input type="submit" id="searchsubmit"
 				value="Filter by name"
 				class="btn btn-primary">
+				</div>
+				
+				<div class="col-md-2 form-group">
+				  <label for="sel1">Number of elements:</label>
+				  <select class="form-control" name="pageSize">
+				    <option>5</option>
+				    <option>10</option>
+				    <option>20</option>
+				    <option>50</option>
+				  </select>
+				</div>
+		
 		</form>
-		</div>
+		
 		<div class="col-md-2">
 		<a id="add" href="addComputer.jsp" role="button" class="btn btn-success pull-right">Add Computer</a>
 		</div>

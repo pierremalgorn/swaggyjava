@@ -8,4 +8,6 @@ public interface ComputerDao {
 
 	List<Computer> getAll();
 
+	List<Computer> searchComputerName(String search, int pageSize);
+
 }

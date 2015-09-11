@@ -7,6 +7,7 @@ import javax.persistence.EntityManagerFactory;
 import com.rousseaumalgorn.dao.ComputerDao;
 import com.rousseaumalgorn.dao.manager.DaoManager;
 import com.rousseaumalgorn.entity.Computer;
+
 import javax.persistence.EntityManager;
 
 
@@ -101,6 +102,19 @@ public class ComputerDaoImpl implements ComputerDao{
 			INSTANCE = new ComputerDaoImpl();
 		}
 		return INSTANCE;
+	}
+
+	@Override
+	public List<Computer> searchComputerName(String search, int pageSize) {
+		int pageNumber = 1;
+		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		return entityManager.createQuery("select c from Computer c WHERE c.name LIKE :custName")
+				.setParameter("custName", "%"+search+"%")
+				.setFirstResult((pageNumber-1) * pageSize)
+				.setMaxResults(pageSize)
+				.getResultList();
+		
 	}
 	
 }

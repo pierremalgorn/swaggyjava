@@ -39,13 +39,26 @@ public class ComputerServlet  extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Trying hello world console output when calling Servlet
-		List<Computer> computerList = ComputerService.getAll();
+		List<Computer> computerList;
+		
+		int pageSize;
+		if(request.getParameter("pageSize") != null) {
+			pageSize = Integer.parseInt(request.getParameter("pageSize"));
+		} else {
+			pageSize = 5;
+		}
+		
+		if(request.getParameter("search") != null) {
+			String search = request.getParameter("search");
+			computerList = ComputerService.searchComputerName(search, pageSize);
+		} else {		
+			computerList = ComputerService.getAll();		
+		}
+		
 		request.setAttribute("computers", computerList);
 		request.setAttribute("size", computerList.size());
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/dashboard.jsp"));		
 		rd.forward(request, response);
-		
-		
 		
 	}
 
@@ -53,8 +66,7 @@ public class ComputerServlet  extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		//String search = request.getParameter("search");
-		//List<Computer> computerList = ComputerService.getAll();
+		
 		
 //		ComputerDao ComputerDao = ComputerDaoImpl.getInstance();
 //		String login = request.getParameter("login");

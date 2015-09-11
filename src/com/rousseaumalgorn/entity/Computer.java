@@ -53,14 +53,14 @@ public class Computer {
 	public void setName(String name) {
 		this.name = name;
 	}
-	public Date getIntroduced() {
-		return introduced;
+	public String getIntroduced() {
+		return introduced.toString().substring(0, 10);
 	}
 	public void setIntroduced(Date introduced) {
 		this.introduced = introduced;
 	}
-	public Date getDiscontinued() {
-		return discontinued;
+	public String getDiscontinued() {
+		return discontinued.toString().substring(0, 10);
 	}
 	public void setDiscontinued(Date discontinued) {
 		this.discontinued = discontinued;
