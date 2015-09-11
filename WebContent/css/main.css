@@ -26,3 +26,7 @@ table.computers .company_name {
 
 table.computers .header a {
 }
+
+#actions {
+	padding-bottom: 1em;
+}
