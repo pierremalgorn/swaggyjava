@@ -4,12 +4,12 @@
 <div class="container-fluid">
   <div class="row">
   	<div class="col-md-12">
-	<h1 id="homeTitle">456 Computers found</h1>
+	<h1 id="homeTitle">	<%=	request.getAttribute("size") %>	Computers found</h1>
 	</div>
   </div>
 	<div class="row" id="actions">
 		<div class="col-md-10">
-		<form action="" method="GET" class="form-inline" role="form">
+		<form action="/ComputerServlet" method="GET" class="form-inline" role="form">
 			<input type="search" id="searchbox" name="search" class="form-control"
 				value="" placeholder="Search name">
 			<input type="submit" id="searchsubmit"

@@ -1,6 +1,7 @@
 package com.rousseaumalgorn.controller;
 
 import java.io.IOException;
+import java.util.List;
 
 import javax.servlet.RequestDispatcher;
 import javax.servlet.ServletException;
@@ -38,7 +39,9 @@ public class ComputerServlet  extends HttpServlet {
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
 		//Trying hello world console output when calling Servlet
-		request.setAttribute("computers", ComputerService.getAll());		
+		List<Computer> computerList = ComputerService.getAll();
+		request.setAttribute("computers", computerList);
+		request.setAttribute("size", computerList.size());
 		RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/dashboard.jsp"));		
 		rd.forward(request, response);
 		
@@ -49,13 +52,15 @@ public class ComputerServlet  extends HttpServlet {
 	/**
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
-//	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-//		// TODO Auto-generated method stub
+	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
+		//String search = request.getParameter("search");
+		//List<Computer> computerList = ComputerService.getAll();
+		
 //		ComputerDao ComputerDao = ComputerDaoImpl.getInstance();
 //		String login = request.getParameter("login");
 //		String password = request.getParameter("password");
 //		ComputerDao.create(new Computer(null, login, password));
 //		this.doGet(request, response);
-//	}
+	}
 
 }
