@@ -105,8 +105,7 @@ public class ComputerDaoImpl implements ComputerDao{
 	}
 
 	@Override
-	public List<Computer> searchComputerName(String search, int pageSize) {
-		int pageNumber = 1;
+	public List<Computer> searchComputerName(String search, int pageSize, int pageNumber) {
 		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		return entityManager.createQuery("select c from Computer c WHERE c.name LIKE :custName")
@@ -116,5 +115,15 @@ public class ComputerDaoImpl implements ComputerDao{
 				.getResultList();
 		
 	}
+	
+	public Long getNbResults(String search) {
+		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		return (Long)entityManager.createQuery("select count(*) from Computer c WHERE c.name LIKE :custName")
+				.setParameter("custName", "%"+search+"%")
+				.getSingleResult();
+	}
+	
+	
 	
 }

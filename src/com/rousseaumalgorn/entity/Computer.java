@@ -54,12 +54,18 @@ public class Computer {
 		this.name = name;
 	}
 	public String getIntroduced() {
+		if(introduced == null) {
+			return null;
+		}
 		return introduced.toString().substring(0, 10);
 	}
 	public void setIntroduced(Date introduced) {
 		this.introduced = introduced;
 	}
 	public String getDiscontinued() {
+		if(discontinued == null) {
+			return null;
+		}
 		return discontinued.toString().substring(0, 10);
 	}
 	public void setDiscontinued(Date discontinued) {

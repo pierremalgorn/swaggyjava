@@ -31,8 +31,13 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 
 	@Override
-	public List<Computer> searchComputerName(String search, int pageSize) {
-		return ComputerDao.searchComputerName(search, pageSize);
+	public List<Computer> searchComputerName(String search, int pageSize, int pageNumber) {
+		return ComputerDao.searchComputerName(search, pageSize, pageNumber);
+	}
+
+	@Override
+	public Long getNbResults(String search) {
+		return ComputerDao.getNbResults(search);
 	}
 
 //	@Override

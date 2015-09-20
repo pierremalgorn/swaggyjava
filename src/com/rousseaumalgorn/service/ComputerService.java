@@ -8,6 +8,8 @@ public interface ComputerService {
 
 	List<Computer> getAll();
 
-	List<Computer> searchComputerName(String search, int pageSize);
+	Long getNbResults(String search);
+
+	List<Computer> searchComputerName(String search, int pageSize, int pageNumber);
 
 }

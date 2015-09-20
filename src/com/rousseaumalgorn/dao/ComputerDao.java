@@ -7,7 +7,8 @@ import com.rousseaumalgorn.entity.Computer;
 public interface ComputerDao {
 
 	List<Computer> getAll();
+	
+	Long getNbResults(String search);
 
-	List<Computer> searchComputerName(String search, int pageSize);
-
+	List<Computer> searchComputerName(String search, int pageSize, int pageNumber);
 }
