@@ -40,6 +40,13 @@ public class ComputerServiceImpl implements ComputerService {
 		return ComputerDao.getNbResults(search);
 	}
 
+	@Override
+	public void addComputer(String name, String introduced,
+			String discontinued, String company) {
+		ComputerDao.addComputer(name, introduced, discontinued, company);
+		
+	}
+
 //	@Override
 //	public Computer getById(Long id) {
 //		return ComputerDao.getById(id);

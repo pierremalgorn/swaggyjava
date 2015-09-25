@@ -1,6 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 <jsp:include page="include/header.jsp" />
 
+<%-- On initialise l'appel ajax --%>
 <script>
 
 var xmlhttp = new XMLHttpRequest();
@@ -42,7 +43,7 @@ function getTab(nbPage) {
 		</form>
 		
 		<div class="col-md-2">
-		<a id="add" href="addComputer.jsp" role="button" class="btn btn-success pull-right">Add Computer</a>
+		<a id="add" href="AddComputerServlet" role="button" class="btn btn-success pull-right">Add Computer</a>
 		</div>
 	</div>
 	<div id="reload" class="row">
@@ -52,6 +53,8 @@ function getTab(nbPage) {
 		
 </div>
 
+
+<%-- On affiche ici le tableau récupéré en Ajax --%>
 <script>
 	getTab(1);
 </script>

@@ -1,11 +1,13 @@
 package com.rousseaumalgorn.dao.impl;
 
+import java.sql.Date;
 import java.util.List;
 
 import javax.persistence.EntityManagerFactory;
 
 import com.rousseaumalgorn.dao.ComputerDao;
 import com.rousseaumalgorn.dao.manager.DaoManager;
+import com.rousseaumalgorn.entity.Company;
 import com.rousseaumalgorn.entity.Computer;
 
 import javax.persistence.EntityManager;
@@ -122,6 +124,30 @@ public class ComputerDaoImpl implements ComputerDao{
 		return (Long)entityManager.createQuery("select count(*) from Computer c WHERE c.name LIKE :custName")
 				.setParameter("custName", "%"+search+"%")
 				.getSingleResult();
+	}
+
+	@Override
+	public void addComputer(String name, String introduced,	String discontinued, String company) {
+		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		Company companyObject = (Company)entityManager.createQuery("select c from Company c WHERE c.name LIKE :compName")
+				.setParameter("compName", "%"+company+"%")
+				.getSingleResult();	
+		
+		Computer computer = new Computer();
+		computer.setName(name);
+		computer.setIntroduced(introduced);
+		computer.setDiscontinued(discontinued);
+		computer.setCompany(companyObject);	
+		
+		entityManager.getTransaction().begin();
+        // persist object - add to entity manager
+        entityManager.persist(computer);
+        // flush entityManager - save to DB
+        entityManager.flush();	    
+	    // commit transaction at all
+	    entityManager.getTransaction().commit();		
+		
 	}
 	
 	

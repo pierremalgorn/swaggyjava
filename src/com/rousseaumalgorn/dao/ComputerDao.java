@@ -11,4 +11,6 @@ public interface ComputerDao {
 	Long getNbResults(String search);
 
 	List<Computer> searchComputerName(String search, int pageSize, int pageNumber);
+	
+	void addComputer(String name, String introduced, String discontinued, String company);
 }

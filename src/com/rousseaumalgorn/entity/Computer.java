@@ -1,8 +1,14 @@
 package com.rousseaumalgorn.entity;
 
+import java.text.ParseException;
+import java.text.SimpleDateFormat;
 import java.util.Date;
 
+import javax.persistence.Basic;
+import javax.persistence.Column;
 import javax.persistence.Entity;
+import javax.persistence.GeneratedValue;
+import javax.persistence.GenerationType;
 import javax.persistence.Id;
 import javax.persistence.JoinColumn;
 import javax.persistence.ManyToOne;
@@ -14,6 +20,9 @@ import javax.persistence.TemporalType;
 @Table(name = "computer")
 public class Computer {
 	@Id
+	@GeneratedValue(strategy = GenerationType.IDENTITY)
+    @Basic(optional = false)
+	@Column(name = "id", unique=true, nullable = false)
 	private Long id;
 	private String name;
 	
@@ -59,8 +68,14 @@ public class Computer {
 		}
 		return introduced.toString().substring(0, 10);
 	}
-	public void setIntroduced(Date introduced) {
-		this.introduced = introduced;
+	public void setIntroduced(String introduced) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.introduced = formatter.parse(introduced);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public String getDiscontinued() {
 		if(discontinued == null) {
@@ -68,8 +83,14 @@ public class Computer {
 		}
 		return discontinued.toString().substring(0, 10);
 	}
-	public void setDiscontinued(Date discontinued) {
-		this.discontinued = discontinued;
+	public void setDiscontinued(String discontinued) {
+		SimpleDateFormat formatter = new SimpleDateFormat("yyyy-MM-dd");
+		try {
+			this.discontinued = formatter.parse(discontinued);
+		} catch (ParseException e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 	}
 	public Company getCompany() {
 		return company;
