@@ -1,7 +1,7 @@
 <%@ taglib prefix="c" uri="http://java.sun.com/jsp/jstl/core"%>
 
   	<div class="col-md-12">
-	<h1 id="homeTitle">	<%=	request.getAttribute("size") %>	Computers found</h1>
+	<h3 id="homeTitle">	<%=	request.getAttribute("size") %>	Computers found with your parameters</h3>
 	</div>
 
 <div class="col-md-12">

@@ -84,7 +84,7 @@ public class ComputerDaoImpl implements ComputerDao{
         entityManager.persist(computer);
         // flush entityManager - save to DB
         entityManager.flush();	    
-	    // commit transaction at all
+	    // commit transaction
 	    entityManager.getTransaction().commit();		
 		
 	}
@@ -101,7 +101,7 @@ public class ComputerDaoImpl implements ComputerDao{
 		entityManager.remove(computerToDelete);
         // flush entityManager - save to DB
         entityManager.flush();	    
-	    // commit transaction at all
+	    // commit transaction
 	    entityManager.getTransaction().commit();	
 		
 	}

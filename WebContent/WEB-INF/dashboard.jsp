@@ -21,34 +21,45 @@ function getTab(nbPage) {
 
 <div class="container-fluid">
 	<div class="row" id="actions">
-		<div class="col-md-6">
-		<form action="/swaggyjava/ComputerServlet" method="GET" class="form-inline" role="form">
-			<input type="search" id="searchbox" name="search" class="form-control"
-				value="" placeholder="Search name">
-			<input onclick="getTab(1)" type="button" id="searchsubmit"
-				value="Filter by name"
-				class="btn btn-primary">
-				</div>
+		<div class="col-md-5 border-right">
+			<h2 class="titles"> Parameters </h2>
+			<div class="col-md-5">
+				<label for="sel1">Computer</label>
+				<form action="/swaggyjava/ComputerServlet" method="GET" class="form-inline" role="form">
+				<input class="form-control computer-name" type="search" id="searchbox" name="search" value="" placeholder="Search name...">
+				</form>
+			</div>
+			
+			<div class="col-md-3">
+				<label for="sel1">Per page</label>
+				<select class="form-control computer-number" name="pageSize" id="pageSize">
+			    	<option>20</option>
+			    	<option>50</option>
+			    	<option>100</option>
+			  	</select>
+			</div>  
+
+			<div class="col-md-4 button-modify">		
+				<input onclick="getTab(1)" type="button" id="searchsubmit"
+					value="Apply Parameters"
+					class="btn btn-primary">
+			</div>
+		</div>
+
 				
-				<div class="col-md-2 form-group">
-				  <label for="sel1">Number of elements:</label>
-				  <select class="form-control" name="pageSize" id="pageSize">
-				    <option>5</option>
-				    <option>10</option>
-				    <option>20</option>
-				    <option>50</option>
-				  </select>
-				</div>
-		
-		</form>
-		
-		<div class="col-md-2">
-		<a id="add" href="AddComputerServlet" role="button" class="btn btn-success pull-right">Add Computer</a>
+		<div class="col-md-3 border-right">
+			<h2 class="titles"> Functions </h2>
+			<label class="add-computer-col"> <i>This will lead you to another page</i></label>
+			<a id="add" href="AddComputerServlet" role="button" class="btn btn-success add-computer-col">Add Computer</a>
+		</div>
+	
+	
+		<div class="col-md-3 img-computer">
+			<img src="img/Logo_pc.png" height="150">
 		</div>
 	</div>
+	
 	<div id="reload" class="row">
-		
-		
 	</div>
 		
 </div>

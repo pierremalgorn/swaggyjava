@@ -30,3 +30,36 @@ table.computers .header a {
 #actions {
 	padding-bottom: 1em;
 }
+
+.img-computer{
+	text-align:center;
+}
+
+.add-computer-col{
+	margin-left: 25px;
+}
+
+.add-computer{
+	margin-top:25px;
+	margin-bottom:5px;
+}
+
+.computer-name{
+	max-width: 145px;
+}
+
+.titles{
+	padding-bottom: 5px;
+}
+
+.computer-number{
+	max-width: 80px;
+}
+
+.border-right{
+	border-right: 1px solid #ddd;
+}
+	
+.button-modify{
+	padding-top: 25px;
+}'
