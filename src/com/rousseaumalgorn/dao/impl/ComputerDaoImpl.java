@@ -38,67 +38,6 @@ public class ComputerDaoImpl implements ComputerDao{
 		return entityManager.createQuery("select c from Computer c").getResultList();
 	}
 	
-//	@Override
-//	public List<Computer> getAll() {
-//		Connection connection = null;
-//		Statement statement = null;
-//		ResultSet resultSet = null;
-//		try {
-//			connection = DriverManager.getConnection(URL, USER, PASSWORD);
-//			statement = connection.createStatement();
-//			String sql = "SELECT * FROM computer";
-//			resultSet = statement.executeQuery(sql);
-//			List<Computer> computerList = new ArrayList<Computer>();
-//			while (resultSet.next()) {
-//				Computer computer = new Computer(resultSet.getInt("id"), resultSet.getString("name"), ((Timestamp)resultSet.getLong("introduced")).getTime(), resultSet.getLong("name"), 0);
-//				computerList.add(computer);
-//			}
-//			return computerList;
-//		} catch (SQLException e) {
-//			throw new DAOException("TODO better message", e);
-//		} finally {
-//			DaoUtils.closeAll(resultSet, statement, connection);
-//		}
-//	}
-//
-//	@Override
-//	public User getById(Long id) {
-//		Connection connection = null;
-//		PreparedStatement statement = null;
-//		ResultSet resultSet = null;
-//		try {
-//			connection = DriverManager.getConnection(URL, USER, PASSWORD);
-//			statement = connection.prepareStatement("SELECT * FROM user WHERE id = ?");
-//			statement.setLong(1, id);
-//			resultSet = statement.executeQuery();
-//			List<User> userList = new ArrayList<User>();
-//			while (resultSet.next()) {
-//				User user = User.builder()
-//						.setId(resultSet.getInt("id"))
-//						.setLogin(resultSet.getString("login"))
-//						.setPassword(resultSet.getString("password"))
-//						.build();
-//				userList.add(user);
-//			}
-//			if(userList.size() > 1) {
-//				throw new DAOException("Database incorrect, duplicate id :"+id);
-//			} else if (userList.size() == 1) {
-//				return userList.get(0);
-//			} else {
-//				return null;
-//			}
-//		} catch (SQLException e) {
-//			throw new DAOException("TODO better message");
-//		} finally {
-//			DaoUtils.closeAll(resultSet, statement, connection);
-//		}
-//	}
-//
-//	@Override
-//	public void insert(User user) {
-//		// TODO
-//	}
-	
 	public static ComputerDao getInstance(){
 		if(INSTANCE == null) {
 			INSTANCE = new ComputerDaoImpl();
@@ -147,6 +86,23 @@ public class ComputerDaoImpl implements ComputerDao{
         entityManager.flush();	    
 	    // commit transaction at all
 	    entityManager.getTransaction().commit();		
+		
+	}
+
+	@Override
+	public void deleteComputer(Long id) {
+		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
+		EntityManager entityManager = entityManagerFactory.createEntityManager();
+		
+		Computer computerToDelete = entityManager.find(Computer.class, id);		
+		
+		entityManager.getTransaction().begin();
+        // persist object - add to entity manager
+		entityManager.remove(computerToDelete);
+        // flush entityManager - save to DB
+        entityManager.flush();	    
+	    // commit transaction at all
+	    entityManager.getTransaction().commit();	
 		
 	}
 	

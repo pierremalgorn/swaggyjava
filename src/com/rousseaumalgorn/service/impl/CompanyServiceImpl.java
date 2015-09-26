@@ -4,6 +4,7 @@ import java.util.List;
 
 import com.rousseaumalgorn.dao.CompanyDao;
 import com.rousseaumalgorn.dao.impl.CompanyDaoImpl;
+import com.rousseaumalgorn.dao.impl.CompanyDaoJDBCImpl;
 import com.rousseaumalgorn.entity.Company;
 import com.rousseaumalgorn.service.CompanyService;
 
@@ -21,7 +22,7 @@ public class CompanyServiceImpl implements CompanyService {
 	}
 	
 	private CompanyServiceImpl() {
-		this.CompanyDao = CompanyDaoImpl.getInstance();
+		this.CompanyDao = CompanyDaoJDBCImpl.getInstance();
 	}
 	
 	@Override

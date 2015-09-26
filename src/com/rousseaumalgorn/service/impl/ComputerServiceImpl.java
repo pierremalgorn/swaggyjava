@@ -5,6 +5,7 @@ import java.util.List;
 import com.rousseaumalgorn.entity.Computer;
 import com.rousseaumalgorn.dao.ComputerDao;
 import com.rousseaumalgorn.dao.impl.ComputerDaoImpl;
+import com.rousseaumalgorn.dao.impl.ComputerDaoJDBCImpl;
 import com.rousseaumalgorn.service.ComputerService;
 
 
@@ -22,7 +23,7 @@ public class ComputerServiceImpl implements ComputerService {
 	}
 	
 	private ComputerServiceImpl() {
-		this.ComputerDao = ComputerDaoImpl.getInstance();
+		this.ComputerDao = ComputerDaoJDBCImpl.getInstance();
 	}
 	
 	@Override
@@ -44,6 +45,12 @@ public class ComputerServiceImpl implements ComputerService {
 	public void addComputer(String name, String introduced,
 			String discontinued, String company) {
 		ComputerDao.addComputer(name, introduced, discontinued, company);
+		
+	}
+
+	@Override
+	public void deleteComputer(Long id) {
+		ComputerDao.deleteComputer(id);
 		
 	}
 

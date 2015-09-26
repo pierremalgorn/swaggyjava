@@ -38,43 +38,34 @@ public class ComputerServlet  extends HttpServlet {
 	 * @see HttpServlet#doGet(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doGet(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		Long computerNb = 0L;
-		List<Computer> computerList;
 		
-		int pageSize;
-		if(request.getParameter("pageSize") != null) {
+		//Si requête AJAX d'update
+		if(request.getParameter("update") != null) {
+			Long computerNb = 0L;
+			List<Computer> computerList;		
+			int pageSize;		
+			int pageNumber;
+			
 			pageSize = Integer.parseInt(request.getParameter("pageSize"));
-		} else {
-			//Par défaut : 5 items par page
-			pageSize = 5;
-		}
-		
-		int pageNumber;
-		if(request.getParameter("page") != null) {
 			pageNumber = Integer.parseInt(request.getParameter("page"));
-		} else {
-			//Par défaut : page 1
-			pageNumber = 1;
-		}
-		
-		if(request.getParameter("search") != null) {
+			
 			String search = request.getParameter("search");
 			computerNb = ComputerService.getNbResults(search);
 			computerList = ComputerService.searchComputerName(search, pageSize, pageNumber);
-		} else {		
-			computerList = ComputerService.getAll();		
-		}
-		
-		request.setAttribute("computers", computerList);
-		request.setAttribute("size", computerNb);
-		request.setAttribute("nbPages", Math.ceil((double)computerNb / (double)pageSize));
-		request.setAttribute("page", pageNumber);
-		
-		if(request.getParameter("update") == null) {
-			RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/dashboard.jsp"));		
-			rd.forward(request, response);
-		} else {
+			
+			request.setAttribute("computers", computerList);
+			request.setAttribute("size", computerNb);
+			request.setAttribute("nbPages", Math.ceil((double)computerNb / (double)pageSize));
+			request.setAttribute("page", pageNumber);
+			
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/table.jsp"));		
+			rd.forward(request, response);
+		} else if(request.getParameter("delete") != null){
+			Long id = Long.parseLong(request.getParameter("id"));
+			ComputerService.deleteComputer(id);
+			response.sendRedirect("ComputerServlet");
+		} else {
+			RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/dashboard.jsp"));		
 			rd.forward(request, response);
 		}
 		

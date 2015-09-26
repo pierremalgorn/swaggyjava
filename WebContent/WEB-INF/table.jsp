@@ -16,6 +16,7 @@
 					<th>Discontinued Date</th>
 					<!-- Table header for Company -->
 					<th>Company</th>
+					<th>Delete?</th>
 				</tr>
 			</thead>
 			<tbody>
@@ -25,6 +26,7 @@
 						<td>${computer.introduced}</td>
 						<td>${computer.discontinued}</td>
 						<td>${computer.company.name}</td>
+						<td><a href="ComputerServlet?delete=true&id=${computer.id}"><img src="img/trash.png"></a></td>
 					</tr>
 				</c:forEach>
 			</tbody>

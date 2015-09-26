@@ -15,4 +15,6 @@ public interface ComputerService {
 	void addComputer(String name, String introduced, String discontinued,
 			String company);
 
+	void deleteComputer(Long id);
+
 }
