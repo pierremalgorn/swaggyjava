@@ -5,6 +5,7 @@ import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
 
+//Permet de fermer les connexions DAO
 public class DaoUtils {
 	public static void closeAll(ResultSet resultSet, Statement statement, Connection connection) {
 		if(connection != null) {

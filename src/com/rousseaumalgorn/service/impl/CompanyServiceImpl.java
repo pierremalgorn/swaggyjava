@@ -8,6 +8,7 @@ import com.rousseaumalgorn.dao.impl.CompanyDaoJDBCImpl;
 import com.rousseaumalgorn.entity.Company;
 import com.rousseaumalgorn.service.CompanyService;
 
+//Singleton
 public class CompanyServiceImpl implements CompanyService {
 
 	private CompanyDao CompanyDao;

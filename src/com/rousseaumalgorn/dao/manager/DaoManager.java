@@ -4,6 +4,7 @@ import javax.persistence.EntityManagerFactory;
 import javax.persistence.Persistence;
 
 public class DaoManager {
+	//Singleton DaoManager
 	private static DaoManager INSTANCE = null;
 	private EntityManagerFactory emf = null;
 	

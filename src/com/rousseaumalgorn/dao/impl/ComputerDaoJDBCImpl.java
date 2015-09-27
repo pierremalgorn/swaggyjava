@@ -49,8 +49,11 @@ public class ComputerDaoJDBCImpl implements ComputerDao {
 		try {
 			connection = (Connection) DriverManager.getConnection(URL, USER, PASSWORD);
 			statement = (Statement) connection.createStatement();
+			//JOIN sur company pour récupérer les Company associées aux Computer
 			String sql = "SELECT `computer`.`id`, `computer`.`name`, `introduced`, `discontinued`, `company`.`id` AS `company_id`, `company`.`name` AS `company_name` FROM `computer` LEFT JOIN `company` ON `company_id` = `company`.`id`";
 			resultSet = statement.executeQuery(sql);
+			
+			//On récupère la liste des Computer retournés
 			List<Computer> computerList = new ArrayList<Computer>();
 			while (resultSet.next()) {
 				Computer computer = new Computer(resultSet.getLong("id"), resultSet.getString("name"), (Date)resultSet.getTimestamp("introduced"), (Date)resultSet.getTimestamp("discontinued"), new Company(resultSet.getLong("company_id"), resultSet.getString("company_name")));
@@ -65,6 +68,7 @@ public class ComputerDaoJDBCImpl implements ComputerDao {
 	}
 
 	@Override
+	//On retourne le nombre de résultats pour une recherche donnée
 	public Long getNbResults(String search) {
 		Connection connection = null;
 		PreparedStatement statement = null;

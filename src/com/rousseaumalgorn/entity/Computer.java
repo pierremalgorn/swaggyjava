@@ -19,6 +19,8 @@ import javax.persistence.TemporalType;
 @Entity
 @Table(name = "computer")
 public class Computer {
+	
+	//On a besoins de ces indicateurs pour Hibernate afin de l'informer que l'id est unique et auto-incrémenté
 	@Id
 	@GeneratedValue(strategy = GenerationType.IDENTITY)
     @Basic(optional = false)
@@ -26,12 +28,14 @@ public class Computer {
 	private Long id;
 	private String name;
 	
+	//Marqueur permettant de convertir la date dans le bon format
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date introduced;
 	
 	@Temporal(TemporalType.TIMESTAMP)
 	private Date discontinued;
 	
+	//Permet de préciser un JOIN sur Company sur le company_id
 	@ManyToOne
 	@JoinColumn(name="company_id")
 	private Company company;
@@ -63,6 +67,7 @@ public class Computer {
 		this.name = name;
 	}
 	public String getIntroduced() {
+		//Pour éviter les NullPointerException
 		if(introduced == null) {
 			return null;
 		}

@@ -14,9 +14,6 @@ import javax.persistence.EntityManager;
 
 
 public class ComputerDaoImpl implements ComputerDao{
-//	private static final String URL = "jdbc:mysql://127.0.0.1:3306/computer-database-db";
-//	private static final String USER = "java";
-//	private static final String PASSWORD = "root";
 
 	private static ComputerDao INSTANCE = null;
 	
@@ -46,22 +43,25 @@ public class ComputerDaoImpl implements ComputerDao{
 	}
 
 	@Override
+	//pageSize: nombre de résultats à afficher; pageNumber: numéro de page
 	public List<Computer> searchComputerName(String search, int pageSize, int pageNumber) {
 		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		return entityManager.createQuery("select c from Computer c WHERE c.name LIKE :custName")
-				.setParameter("custName", "%"+search+"%")
+		//On get les résultats correspondants à la plage sélectionnée
+		return entityManager.createQuery("select c from Computer c WHERE c.name LIKE :compName")
+				.setParameter("compName", "%"+search+"%")
 				.setFirstResult((pageNumber-1) * pageSize)
 				.setMaxResults(pageSize)
 				.getResultList();
 		
 	}
 	
+	//Retourne le nombre de résultats pour une recherche donnée
 	public Long getNbResults(String search) {
 		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
-		return (Long)entityManager.createQuery("select count(*) from Computer c WHERE c.name LIKE :custName")
-				.setParameter("custName", "%"+search+"%")
+		return (Long)entityManager.createQuery("select count(*) from Computer c WHERE c.name LIKE :compName")
+				.setParameter("compName", "%"+search+"%")
 				.getSingleResult();
 	}
 
@@ -73,12 +73,14 @@ public class ComputerDaoImpl implements ComputerDao{
 				.setParameter("compName", "%"+company+"%")
 				.getSingleResult();	
 		
+		//On instance un nouveau Computer pour l'injecter dans la BDD
 		Computer computer = new Computer();
 		computer.setName(name);
 		computer.setIntroduced(introduced);
 		computer.setDiscontinued(discontinued);
 		computer.setCompany(companyObject);	
 		
+		//On fait une transaction pour appliquer les changements dans la base
 		entityManager.getTransaction().begin();
         // persist object - add to entity manager
         entityManager.persist(computer);
@@ -94,8 +96,10 @@ public class ComputerDaoImpl implements ComputerDao{
 		EntityManagerFactory entityManagerFactory = DaoManager.getInstance().getEntityManagerFactory();
 		EntityManager entityManager = entityManagerFactory.createEntityManager();
 		
+		//On recherche dans la base le computer à supprimer grâce à l'id
 		Computer computerToDelete = entityManager.find(Computer.class, id);		
 		
+		//On fait une transaction pour appliquer les changements dans la base
 		entityManager.getTransaction().begin();
         // persist object - add to entity manager
 		entityManager.remove(computerToDelete);

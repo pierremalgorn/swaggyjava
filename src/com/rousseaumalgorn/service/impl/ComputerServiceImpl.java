@@ -8,7 +8,7 @@ import com.rousseaumalgorn.dao.impl.ComputerDaoImpl;
 import com.rousseaumalgorn.dao.impl.ComputerDaoJDBCImpl;
 import com.rousseaumalgorn.service.ComputerService;
 
-
+//Singleton
 public class ComputerServiceImpl implements ComputerService {
 
 	private ComputerDao ComputerDao;
