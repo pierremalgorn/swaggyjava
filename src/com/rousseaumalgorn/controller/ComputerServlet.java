@@ -12,8 +12,11 @@ import javax.servlet.http.HttpServletResponse;
 
 import com.rousseaumalgorn.dao.ComputerDao;
 import com.rousseaumalgorn.dao.impl.ComputerDaoImpl;
+import com.rousseaumalgorn.entity.Company;
 import com.rousseaumalgorn.entity.Computer;
+import com.rousseaumalgorn.service.CompanyService;
 import com.rousseaumalgorn.service.ComputerService;
+import com.rousseaumalgorn.service.impl.CompanyServiceImpl;
 import com.rousseaumalgorn.service.impl.ComputerServiceImpl;
 
 
@@ -25,6 +28,7 @@ public class ComputerServlet  extends HttpServlet {
 	 */
 	private static final long serialVersionUID = 1L;
 	private ComputerService ComputerService;
+	private CompanyService CompanyService;
 	
     /**
      * @see HttpServlet#HttpServlet()
@@ -32,6 +36,7 @@ public class ComputerServlet  extends HttpServlet {
     public ComputerServlet() {
         super();
         ComputerService = ComputerServiceImpl.getInstance();
+        CompanyService = CompanyServiceImpl.getInstance();
     }
 
 	/**
@@ -65,6 +70,8 @@ public class ComputerServlet  extends HttpServlet {
 			ComputerService.deleteComputer(id);
 			response.sendRedirect("ComputerServlet");
 		} else {
+			List<Company> companies = CompanyService.getAll();
+			request.setAttribute("companies", companies);
 			RequestDispatcher rd = getServletContext().getRequestDispatcher(response.encodeURL("/WEB-INF/dashboard.jsp"));		
 			rd.forward(request, response);
 		}
@@ -76,13 +83,12 @@ public class ComputerServlet  extends HttpServlet {
 	 * @see HttpServlet#doPost(HttpServletRequest request, HttpServletResponse response)
 	 */
 	protected void doPost(HttpServletRequest request, HttpServletResponse response) throws ServletException, IOException {
-		
-		
-//		ComputerDao ComputerDao = ComputerDaoImpl.getInstance();
-//		String login = request.getParameter("login");
-//		String password = request.getParameter("password");
-//		ComputerDao.create(new Computer(null, login, password));
-//		this.doGet(request, response);
+		String name = request.getParameter("name");
+		String introduced = request.getParameter("introduced");
+		String discontinued = request.getParameter("discontinued");
+		String company = request.getParameter("company");
+		ComputerService.addComputer(name, introduced, discontinued, company);
+		response.sendRedirect("ComputerServlet");
 	}
 
 }
