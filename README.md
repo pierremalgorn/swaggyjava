@@ -4,8 +4,8 @@ Logiciel en JEE permettant la gestion d'une base de donnée simple constitués d
 
 ### Fonctionnalités basiques :
 
-- <b>Liste des ordinateurs à partir de la BDD :</b> On peut consulter une liste contenant le nom de l'ordinateur, les dates de mise en service / hors service, le fabriquant.
-- <b>Structure du code : </b>Structure de type MVC qui comprends des DAO, Services et Controllers afin de respecter au mieu les bonnes pratiques
+- <b>Liste des ordinateurs à partir de la BDD :</b> On peut consulter une liste contenant le nom de l'ordinateur, les dates de mise en service / hors service, ainsi que le fabriquant.
+- <b>Structure du code : </b>Structure de type MVC qui comprends des DAO, Services et Controllers afin de respecter au mieux les bonnes pratiques
 - <b>Evolutivité : </b>Le programme fonctionne autant avec JDBC que Hibernate, dans le but d'être plus flexible //TODO Expliquer comment on switch entre les deux
 - <b>Tags JSTL : </b> // TODO Expliquer
 
