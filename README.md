@@ -3,7 +3,11 @@
 Logiciel en JEE permettant la gestion d'une base de donnée simple constitués d'ordinateurs et de leurs fabriquants.
 
 
+
+
 Fonctionnalités basiques :
+
+
 - Liste des ordinateurs à partir de la BDD 
 
 On peut consulter une liste contenant le nom de l'ordinateur, les dates de mise en service / hors service, le fabriquant.
@@ -18,7 +22,11 @@ Nous nous sommes efforcé de respecter les bonnes pratiques afin de rendre un co
 // TODO : Expliquer
 
 
+
+
 Fonctionnalités avancées :
+
+
 - Interface ergonomique et épurée qui reste esthétique
 - Requêtes en AJAX qui permette de lier la BDD et le logiciel. //TODO : Expliquer plus ?
 - Pagination (flexible) de la liste, qui commence à 20 et peut varier entre 20, 50 et 100
